@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+  <testsuite errors="0" failures="0" hostname="MacBookProFederico.local" id="0" name="GoogleDriveTests" package="com.google.drive" tests="1" time="0.185" timestamp="2013-03-20T04:27:48">
+      <properties />
+
+      <testcase classname="com.google.drive.GoogleDriveTests" name="testSomething" time="0.174" />
+
+      <system-out><![CDATA[--Output from testSomething--
+]]></system-out>
+
+      <system-err><![CDATA[--Output from testSomething--
+]]></system-err>
+
+  </testsuite>
+</testsuites>
