@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
-  <testsuite errors="0" failures="0" hostname="MacBookProFederico.local" id="0" name="GoogleDriveTests" package="com.google.drive" tests="1" time="0.185" timestamp="2013-03-20T04:27:48">
+  <testsuite errors="1" failures="0" hostname="EZE1-DNN-00489" id="0" name="GoogleDriveTests" package="com.google.drive" tests="1" time="118.635" timestamp="2013-03-21T16:43:04">
       <properties />
 
-      <testcase classname="com.google.drive.GoogleDriveTests" name="testSomething" time="0.174" />
+      <testcase classname="com.google.drive.GoogleDriveTests" name="testSomething" time="118.62">
+          <error message="Invalid credentials" type="java.lang.IllegalAccessError">java.lang.IllegalAccessError: Invalid credentials
+	at com.google.drive.GoogleDriveTests.authenticate(GoogleDriveTests.groovy:62)
+	at com.google.drive.GoogleDriveTests.getSpreadsheetService(GoogleDriveTests.groovy:73)
+	at com.google.drive.GoogleDriveTests.listSpreadSheets(GoogleDriveTests.groovy:82)
+	at com.google.drive.GoogleDriveTests.testSomething(GoogleDriveTests.groovy:49)
+</error>
+
+      </testcase>
 
       <system-out><![CDATA[--Output from testSomething--
 ]]></system-out>
