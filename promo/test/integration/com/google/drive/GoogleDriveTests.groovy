@@ -8,6 +8,7 @@ import org.springframework.aop.aspectj.RuntimeTestWalker.ThisInstanceOfResidueTe
 //import com.globallogic.sonar.exception.GoogleConnectionException
 import com.google.gdata.client.GoogleService.InvalidCredentialsException
 import com.google.gdata.client.spreadsheet.SpreadsheetService
+import com.google.gdata.data.docs.DocumentEntry;
 import com.google.gdata.data.spreadsheet.SpreadsheetEntry
 import com.google.gdata.data.spreadsheet.SpreadsheetFeed
 
@@ -57,7 +58,7 @@ class GoogleDriveTests {
 	def authenticate(def service){
 //		GoogleCredentials credentials = User.get(springSecurityService.getPrincipal().id).googleCredentials
 		try {
-			service.setUserCredentials('federico.sutin@globallogic.com', '');
+			service.setUserCredentials('federico.sutin@globallogic.com', 'Enable2013');
 		} catch (InvalidCredentialsException e) {
 			throw new IllegalAccessError(e.getMessage());
 		}
@@ -82,15 +83,36 @@ class GoogleDriveTests {
 		SpreadsheetFeed feed = this.getSpreadsheetService().getFeed(url, SpreadsheetFeed.class);
 		
 //		SpreadsheetsService spreedSheetService = new SpreadsheetsService("MySpreadsheetIntegration-v1");
-		this.getSpreadsheetService().RequestFactory
+		this.getSpreadsheetService().requestFactory
 		
 		
-//		List<SpreadsheetEntry> spreadsheets = feed.getEntries();
-//		def result = [:]
-//		for (SpreadsheetEntry sheet : spreadsheets) {
-//			result.put(sheet.getTitle().getPlainText(), sheet.getEditLink()?.getHref())
-//		}
+		List<SpreadsheetEntry> spreadsheets = feed.getEntries();
+		def result = [:]
+		for (SpreadsheetEntry sheet : spreadsheets) {
+			result.put(sheet.getTitle().getPlainText(), sheet.getEditLink()?.getHref())
+		}
 		return result
+	}
+	
+	def insertSpreadSheet(){
+		URL url = new URL(this.SPREADSHEET_FEED_URL);
+		SpreadsheetFeed feed = this.getSpreadsheetService().getFeed(url, SpreadsheetFeed.class);
+		
+			  // TODO: Authorize the service object for a specific user (see Authorizing requests)
+		
+			  // Instantiate a DocumentEntry object to be inserted.
+			  DocumentEntry entry = new DocumentEntry();
+		
+			  // Set the document title
+			  entry.Title.Text = "Legal Contract";
+		
+			  // Add the document category
+			  entry.Categories.Add(DocumentEntry.DOCUMENT_CATEGORY);
+		
+			  // Make a request to the API and create the document.
+			  DocumentEntry newEntry = service.Insert(
+				  DocumentsListQuery.documentsBaseUri, entry);
+			}
 	}
 }
 
