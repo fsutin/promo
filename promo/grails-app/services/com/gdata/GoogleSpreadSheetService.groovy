@@ -1,11 +1,13 @@
 package com.gdata
 
 import java.text.SimpleDateFormat;
+import java.util.TreeMap.PrivateEntryIterator;
 
 import org.sonar.wsclient.services.Measure
 
 import com.google.gdata.client.GoogleService.InvalidCredentialsException
 import com.sun.media.sound.InvalidFormatException
+import com.globallogic.Ctx;
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential
 import com.google.api.client.http.HttpTransport
 import com.google.api.client.http.javanet.NetHttpTransport
@@ -43,10 +45,17 @@ class GoogleSpreadSheetService {
 	
 	private static googleSpreadsheetService
 	
+	String username
+	String password
+	
+	private GoogleSpreadsheetService(){
+		
+	}
 	
    def authenticate(def service){
 	   try {
-		   User usuario = User.findByMail('federico.sutin@globallogic.com')
+		   //User usuario = User.findByMail('federico.sutin@globallogic.com')
+		   def usuario = Ctx.get(Thread.currentThread().getName())
 		   service.setUserCredentials(usuario.mail, usuario.password);
 	   } catch (InvalidCredentialsException e) {
 		   throw new IllegalAccessException(e.getMessage())

@@ -9,10 +9,15 @@ import org.springframework.context.support.StaticApplicationContext;
 class SonarExtractorService {
 	
 	private static Sonar instance
+	
+	def sonarUrl
+	
+	def qualityIndexMetric
+	
 
     private Sonar getSonarInstance() {
 		if(instance == null)
-		 instance = Sonar.create("https://analysis.apache.org/")
+		 instance = Sonar.create(sonarUrl)
 		 //instance = Sonar.create(url, user, pass)
 		return instance
     }
@@ -38,7 +43,13 @@ class SonarExtractorService {
 	}
 	
 	def getMetricFromAllResources(String metric){
-		return getSonarInstance().findAll(new ResourceQuery().setMetrics(metric))
+		def result  = getSonarInstance().findAll(new ResourceQuery().setMetrics(metric))
+		return result
+	}
+	
+	def getQualityIndexFromAllResources(){
+		def result  = getSonarInstance().findAll(new ResourceQuery().setMetrics(qualityIndexMetric))
+		return result
 	}
 	
 	
