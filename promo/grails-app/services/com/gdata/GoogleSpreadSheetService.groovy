@@ -54,7 +54,6 @@ class GoogleSpreadSheetService {
 	
    def authenticate(def service){
 	   try {
-		   //User usuario = User.findByMail('federico.sutin@globallogic.com')
 		   def usuario = Ctx.get(Thread.currentThread().getName())
 		   service.setUserCredentials(usuario.mail, usuario.password);
 	   } catch (InvalidCredentialsException e) {
